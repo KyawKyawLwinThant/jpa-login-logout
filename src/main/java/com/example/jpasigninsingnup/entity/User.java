@@ -1,5 +1,6 @@
 package com.example.jpasigninsingnup.entity;
 
+import com.example.jpasigninsingnup.validation.NamedNotAdmin;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,9 +15,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NamedNotAdmin(message = "Name cannot be admin!")
     @Column(unique = true)
     private String username;
     private String password;
+    @Transient
+    private String repeatedPassword;
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles=

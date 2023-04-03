@@ -8,13 +8,26 @@
           method="post">
       <div class="form-group">
         <label for="username">UserName</label>
-        <input type="text" class="form-control"  th:field="*{username}"
+        <input type="text" class="form-control"
+               th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'"
+               th:field="*{username}"
                id="username">
+        <small th:if="${#fields.hasErrors('username')}"
+               class="invalid-feedback"
+               th:errors="*{username}"></small>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="text" th:field="*{password}" class="form-control"
+        <input type="text" th:field="*{password}"
+               th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"
+               class="form-control"
                id="password">
+        <small th:if="${#fields.hasErrors('password')}" class="invalid-feedback" th:errors="*{password}"></small>
+      </div>
+      <div class="form-group">
+        <label for="repassword">Repeated Password</label>
+        <input type="text" th:field="*{repeatedPassword}" class="form-control"
+               id="repassword">
       </div>
       <div class="form-group">
         <label for="email">Email</label>
